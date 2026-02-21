@@ -1,0 +1,9 @@
+discord.py
+python-dotenv
+PyNaCl
+Pillow
+python-slugify
+requests
+edge-tts
+elevenlabs
+openai
