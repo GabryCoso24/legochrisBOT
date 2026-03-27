@@ -39,10 +39,21 @@ async def load():
             except Exception as e:
                 print(f"❌ Failed to load {filename[:-3]}: {str(e)}")
 
+async def load_generated():
+    """Dynamically load every cog module found in the cogs folder."""
+    for filename in os.listdir("./cogs/generated"):
+        if filename.endswith(".py") and not filename.startswith("__"):
+            try:
+                await client.load_extension(f"cogs.generated.{filename[:-3]}")
+                print(f"✅ {filename[:-3]} is loaded")
+            except Exception as e:
+                print(f"❌ Failed to load {filename[:-3]}: {str(e)}")
+
 async def main():
     """Open bot session, load cogs and start the Discord gateway connection."""
     async with client:
         await load()
+        await load_generated()
         await client.start(TOKEN)
 
 asyncio.run(main())
